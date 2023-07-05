@@ -10,9 +10,9 @@ import PIL.Image
 import base64
 from urllib.request import urlopen
 
-with open('/home/phantom/Desktop/Project 2/movie_data.json', 'r+', encoding='utf-8') as f:
+with open('movie_data.json', 'r+', encoding='utf-8') as f:
     data = json.load(f)
-with open('/home/phantom/Desktop/Project 2/movie_titles.json', 'r+', encoding='utf-8') as f:
+with open('movie_titles.json', 'r+', encoding='utf-8') as f:
     movie_titles = json.load(f)
 hdr = {'User-Agent': 'Mozilla/5.0'}
 #
@@ -68,8 +68,7 @@ def movie_poster_fetcher(imdb_link):
     #      """,
     #     unsafe_allow_html=True)
     
-    # with open('/home/phantom/Downloads/edit1.jpg', "rb") as image_file:
-    with open('/home/phantom/Desktop/Project 2/pic1.jpg', "rb") as image_file:        
+    with open('pic1.jpg', "rb") as image_file:        
         encoded_string = base64.b64encode(image_file.read())
     st.markdown(
     f"""
@@ -146,7 +145,7 @@ def run():
     #      """,
         # unsafe_allow_html=True)
         
-    with open('/home/phantom/Desktop/Project 2/pic2.jpg', "rb") as image_file:        
+    with open('pic2.jpg', "rb") as image_file:        
         encoded_string = base64.b64encode(image_file.read())
     st.markdown(
     f"""

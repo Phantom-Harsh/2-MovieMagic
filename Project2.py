@@ -96,18 +96,57 @@ def movie_poster_fetcher(imdb_link):
     st.image(image, use_column_width=False)
 
 
+# def get_movie_info(imdb_link):
+#     url_data = requests.get(imdb_link, headers=hdr).text
+#     s_data = BeautifulSoup(url_data, 'html.parser')
+#     imdb_content = s_data.find("meta", property="og:description")
+#     movie_descr = imdb_content.attrs['content']
+#     movie_descr = str(movie_descr).split('.')
+#     movie_director = movie_descr[0]
+#     movie_cast = str(movie_descr[1]).replace('With', 'Cast: ').strip()
+#     movie_story = 'Story: ' + str(movie_descr[2]).strip() + '.'
+#     rating = s_data.find("span", class_="sc-bde20123-1 iZlgcd").text
+#     movie_rating = 'Total Rating count: ' + str(rating)
+#     return movie_director, movie_cast, movie_story, movie_rating
+
+
+# def get_movie_info(imdb_link):
+#     url_data = requests.get(imdb_link, headers=hdr).text
+#     s_data = BeautifulSoup(url_data, 'html.parser')
+#     imdb_content = s_data.find("meta", property="og:description")
+#     movie_descr = imdb_content.attrs['content']
+#     movie_descr = str(movie_descr).split('.')
+#     movie_director = movie_descr[0]
+#     movie_cast = str(movie_descr[1]).replace('With', 'Cast: ').strip()
+#     movie_story = 'Story: ' + str(movie_descr[2]).strip() + '.'
+#     rating = s_data.find("span", class_="sc-bde20123-1 iZlgcd").text
+#     movie_rating = 'Total Rating count: ' + str(rating)
+#     return movie_director, movie_cast, movie_story, movie_rating
+
 def get_movie_info(imdb_link):
     url_data = requests.get(imdb_link, headers=hdr).text
     s_data = BeautifulSoup(url_data, 'html.parser')
     imdb_content = s_data.find("meta", property="og:description")
     movie_descr = imdb_content.attrs['content']
     movie_descr = str(movie_descr).split('.')
+
     movie_director = movie_descr[0]
-    movie_cast = str(movie_descr[1]).replace('With', 'Cast: ').strip()
-    movie_story = 'Story: ' + str(movie_descr[2]).strip() + '.'
+
+    if len(movie_descr) > 1:
+        movie_cast = str(movie_descr[1]).replace('With', 'Cast: ').strip()
+    else:
+        movie_cast = "Site Updated Data , So web scraption description Changed  : : No cast information available."
+
+    if len(movie_descr) > 2:
+        movie_story = 'Story: ' + str(movie_descr[2]).strip() + '.'
+    else:
+        movie_story = "Site Updated Data , So web scraption description Changed  : : No story information available."
+
     rating = s_data.find("span", class_="sc-bde20123-1 iZlgcd").text
     movie_rating = 'Total Rating count: ' + str(rating)
+
     return movie_director, movie_cast, movie_story, movie_rating
+
 
 
 def KNN_Movie_Recommender(test_point, k):

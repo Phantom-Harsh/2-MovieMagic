@@ -126,7 +126,8 @@ def movie_poster_fetcher(imdb_link):
 def get_movie_info(imdb_link):
     url_data = requests.get(imdb_link, headers=hdr).text
     s_data = BeautifulSoup(url_data, 'html.parser')
-    imdb_content = s_data.find("meta", property="og:description")
+    # imdb_content = s_data.find("meta", property="og:description")
+    imdb_content = s_data.find("meta",{"name" : "description"})    
     movie_descr = imdb_content.attrs['content']
     movie_descr = str(movie_descr).split('.')
 
